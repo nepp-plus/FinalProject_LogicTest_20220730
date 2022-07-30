@@ -210,7 +210,11 @@ class MainActivity : BaseActivity() {
                 mRankCount04++
             }
             3 -> {
-                mEarnedMoney += 5000
+
+//                현실 고증 : 보통 5천원은 돈으로 수령 X. 무료로 5줄 긋는데 사용.
+//                 => 투자 금액을 5천원 줄여주는 방향.
+
+                mUsedMoney -= 5000
                 mRankCount05++
             }
             else -> {
