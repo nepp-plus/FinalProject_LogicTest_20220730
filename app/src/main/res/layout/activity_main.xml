@@ -193,6 +193,125 @@
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="당첨 횟수 분석"
+            android:layout_marginTop="15dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1등 : " />
+
+            <TextView
+                android:id="@+id/txtRank01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 회" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2등 : " />
+
+            <TextView
+                android:id="@+id/txtRank02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 회" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3등 : " />
+
+            <TextView
+                android:id="@+id/txtRank03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 회" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4등 : " />
+
+            <TextView
+                android:id="@+id/txtRank04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 회" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5등 : " />
+
+            <TextView
+                android:id="@+id/txtRank05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 회" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="낙첨 : " />
+
+            <TextView
+                android:id="@+id/txtNoRank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 회" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 </layout>
