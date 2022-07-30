@@ -20,7 +20,7 @@ class MainActivity : BaseActivity() {
     val mLottoNumTextViews = ArrayList<TextView>() // 표시용 텍스트 6개를 담을 목록
 
 //    보너스번호는 하나만 있으면 됨. => ArrayList X, 일반 변수로
-    val mBonusLottoNum = 0 // 정수라고 인식만.
+    var mBonusLottoNum = 0 // 정수라고 인식만.
 
 //    내 번호 6개는 하드코딩으로 목록에 담아두자.
 
@@ -191,7 +191,34 @@ class MainActivity : BaseActivity() {
             }
         }
 
-//        보너스 번호도 만들어야함.
+//        보너스 번호도 만들어야함. => 유의사항 : 기존 6개 당첨번호와 중복되면 안됨.
+
+//        써도 되는 (중복이 아닌) 번호가 나올때까지 다시 뽑기.
+
+        mBonusLottoNum = 0  // 뽑기 전에 0으로 리셋하고 다시 뽑자
+
+//        무한히 반복 => 써도 되는 번호가 나오면, 무한반복 종료
+
+        while (true) {
+
+//            1~45중 하나를 랜덤 추출
+            val randomNum = (1..45).random()
+
+//            기존 당첨번호와 중복되는지? => OK이면 보너스번호로 채택
+
+            if (!mLottoNumbers.contains( randomNum )) {
+//                중복되지 않는(!) 랜덤넘버 추출됨.
+
+//                사용할 보너스번호로 선정
+                mBonusLottoNum = randomNum
+
+//                무한반복 종료 => 숫자 정리 등 실행.
+                break
+
+            }
+
+
+        }
 
 
 //            담아둔 숫자를 정리. (작은 수 ~ 큰 수로 정렬 : order)
@@ -221,6 +248,7 @@ class MainActivity : BaseActivity() {
 
 //        보너스번호도 텍스트뷰에 보여주자.
 
+        binding.txtBonusNum.text = mBonusLottoNum.toString()
 
     }
 
