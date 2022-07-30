@@ -6,6 +6,8 @@ import android.util.Log
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.neppplus.finalproject_logictest_20220730.databinding.ActivityMainBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : BaseActivity() {
 
@@ -45,7 +47,9 @@ class MainActivity : BaseActivity() {
             }
             
 
-//            담아둔 숫자를 정리.
+//            담아둔 숫자를 정리. (작은 수 ~ 큰 수로 정렬 : order)
+
+            mLottoNumbers.sort() // 코틀린 언어가 제공하는 정렬 기능 활용
 
 
 //            텍스트뷰 6개를 반복적으로 처리 : 반복문 이용
