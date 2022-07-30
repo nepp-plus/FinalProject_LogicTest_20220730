@@ -301,10 +301,26 @@ class MainActivity : BaseActivity() {
 
             }
             5 -> {
-//               (임시) 3등 당첨 : 150만원 당첨금 증액
-                mEarnedMoney += 1500000
 
-                mRankCount03++
+//                실전 : 보너스번호를 맞췄는가? 맞췄다면 2등 (6천), 못맞췄다면 3등 (150)
+//                내 번호중에 하나라도 보너스번호와 같은가?
+
+                if (mMyNumbers.contains(mBonusLottoNum)) {
+//                    내 번호중에 보너스 번호가 있다! => 2등이다!
+
+                    mEarnedMoney += 60000000
+                    mRankCount02++
+
+                }
+                else {
+//                    보너스번호 못맞춤. 3등
+                    mEarnedMoney += 1500000
+
+                    mRankCount03++
+                }
+
+
+
 
             }
             4 -> {
