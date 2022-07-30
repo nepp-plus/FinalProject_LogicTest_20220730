@@ -145,7 +145,16 @@ class MainActivity : BaseActivity() {
 
 //        for문이 끝나면, correctCount 변수에는 맞춘 갯수가 저장되어 있다.
 
-        Toast.makeText(mContext, "${correctCount}개 숫자 맞춤", Toast.LENGTH_SHORT).show()
+//        맞춘 갯수에 따른 등수 판별
+//        6개 : 1등, 5개 : (임시) 3등, 4개 : 4등, 3개 : 5등, 그 이하 : 낙첨
+
+        when (correctCount) {
+            6 -> Toast.makeText(mContext, "1등", Toast.LENGTH_SHORT).show()
+            5 -> Toast.makeText(mContext, "3등 (임시)", Toast.LENGTH_SHORT).show()
+            4 -> Toast.makeText(mContext, "4등", Toast.LENGTH_SHORT).show()
+            3 -> Toast.makeText(mContext, "5등", Toast.LENGTH_SHORT).show()
+            else -> Toast.makeText(mContext, "낙첨", Toast.LENGTH_SHORT).show()
+        }
 
     }
 
