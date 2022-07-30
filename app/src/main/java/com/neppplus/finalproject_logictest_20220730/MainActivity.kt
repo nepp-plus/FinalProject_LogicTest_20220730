@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.neppplus.finalproject_logictest_20220730.databinding.ActivityMainBinding
 import java.util.*
@@ -15,6 +16,10 @@ class MainActivity : BaseActivity() {
 
     val mLottoNumbers = ArrayList<Int>() // 당첨번호 6개를 담을 목록
     val mLottoNumTextViews = ArrayList<TextView>() // 표시용 텍스트 6개를 담을 목록
+
+//    내 번호 6개는 하드코딩으로 목록에 담아두자.
+
+    val mMyNumbers = arrayListOf( 8, 13, 17, 23, 36, 38 )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +34,11 @@ class MainActivity : BaseActivity() {
 
         binding.btnCheckLottoNum.setOnClickListener {
 
+//            당첨 번호 생성
             makeLottoNumbers()
+
+//            내가 몇등인지 체크
+            checkMyRank()
 
         }
 
@@ -109,5 +118,36 @@ class MainActivity : BaseActivity() {
 
 
     }
+
+//    당첨번호와, 내 번호를 비교해주는 함수를 만들자
+
+    fun checkMyRank() {
+
+//        당첨 번호 6개와, 내 번호 6개를 비교해서 => "맞춘 개수"에 따라 등수 판정.
+
+//        몇개를 맞췄는지, 갯수를 구해야 한다.
+
+        var correctCount = 0  // 맞춘 숫자를 찾을때마다 1씩 증가 시킬 예정
+
+//        맞는 숫자 찾기 => 내 번호 하나를 들고 > 당첨번호 6개중에 포함되어있는가? => 내 번호 6개에 반복
+
+        for (myNum  in  mMyNumbers) {
+
+            if (mLottoNumbers.contains( myNum )) {
+
+//                숫자 하나를 (더) 맞췄다!
+
+                correctCount++  // ++ : 기존의 값보다 1 증가시켜서 저장.
+
+            }
+
+        }
+
+//        for문이 끝나면, correctCount 변수에는 맞춘 갯수가 저장되어 있다.
+
+        Toast.makeText(mContext, "${correctCount}개 숫자 맞춤", Toast.LENGTH_SHORT).show()
+
+    }
+
 
 }
