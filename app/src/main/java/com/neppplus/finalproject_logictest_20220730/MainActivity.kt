@@ -2,6 +2,8 @@ package com.neppplus.finalproject_logictest_20220730
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
@@ -33,8 +35,37 @@ class MainActivity : BaseActivity() {
     var mRankCount05 = 0
     var mNoRankCount = 0
 
+//    너무 빠른 반복 대응 => 로또 1회 구매 (완료) => 다시 로또 1회 구매 => Handler의 할 일로 관리
+//    화면에 한번 뿌려주고 > 그 다음 구매로 이동 (화면이 멈추지 않고 실제 동작)
+//    postDelayed 대신 일반 post를 사용.
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    lateinit var mHandler : Handler
+
+//    mHandler가 처리할 일을 변수에 미리 담아두고, 상황에 맞게 이용
+
+    val buyLottoRunnable = object : Runnable {
+        override fun run() {
+
+//            1천만원 이하면 로또 구매 진행, 다음 할일로 이 코드 다시 등록
+            if (mUsedMoney < 10000000) {
+                makeLottoNumbers()
+                checkMyRank()
+
+                mHandler.post(this)
+            }
+            else {
+//                자동구매 종료 안내
+                Toast.makeText(mContext, "자동 구매가 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                
+//                다음 할일 등록 (mHandler.post) 실행 X. 반복 종료 효과 
+                
+            }
+
+        }
+
+    }
+
+   override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setupEvents()
@@ -54,10 +85,14 @@ class MainActivity : BaseActivity() {
 //            문제점 3. 2등 당첨 로직 부재. => 보너스 번호 생성 + 2등 판정 로직 추가
             
 
-            while ( mUsedMoney < 10000000 ) {
-                makeLottoNumbers()
-                checkMyRank()
-            }
+//            while ( mUsedMoney < 10000000 ) {
+//                makeLottoNumbers()
+//                checkMyRank()
+//            }
+            
+//            문제점 2. runnable / Handler를 이용해 반복속도를 조금 낮춤. (화면에도 보이게)
+            mHandler.post(buyLottoRunnable)
+            
 
         }
 
@@ -85,6 +120,10 @@ class MainActivity : BaseActivity() {
         mLottoNumTextViews.add( binding.txtLottoNum04 )
         mLottoNumTextViews.add( binding.txtLottoNum05 )
         mLottoNumTextViews.add( binding.txtLottoNum06 )
+
+//        로또 반복 구매를 관리하는 핸들러 생성
+        mHandler = Handler(Looper.getMainLooper())
+
 
     }
 
