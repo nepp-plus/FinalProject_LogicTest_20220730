@@ -24,6 +24,15 @@ class MainActivity : BaseActivity() {
 //    사용 금액 / 당첨 금액 각각을 변수에 저장하고 활용
     var mUsedMoney = 0
     var mEarnedMoney = 0L  // 20억을 넘어가는 경우가 있으니, 일반 0이 아니라, Long 타입의 0으로 저장
+    
+//    1등~낙첨 횟수들을 각각의 변수에 저장하고 활용
+    var mRankCount01 = 0
+    var mRankCount02 = 0
+    var mRankCount03 = 0
+    var mRankCount04 = 0
+    var mRankCount05 = 0
+    var mNoRankCount = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -184,25 +193,43 @@ class MainActivity : BaseActivity() {
 //                Long 타입으로 변수와 대입값을 변경
 
                 mEarnedMoney += 6100000000
+
+//                1등 당첨 횟수도 하나 증가
+                mRankCount01++
+
             }
             5 -> {
-//                3등 당첨 : 150만원 당첨금 증액
+//               (임시) 3등 당첨 : 150만원 당첨금 증액
                 mEarnedMoney += 1500000
+
+                mRankCount03++
+
             }
             4 -> {
                 mEarnedMoney += 50000
+                mRankCount04++
             }
             3 -> {
                 mEarnedMoney += 5000
+                mRankCount05++
             }
             else -> {
-//                증액 없음. 임시로 비워두자.
+//                증액 없음 => 낙첨 횟수만 증가
+                mNoRankCount++
             }
         }
 
 //            늘어난 당첨금을 텍스트뷰에도 반영
 
         binding.txtEarnedMoney.text = "${ "%,d".format(mEarnedMoney) } 원"
+
+//        1등~낙첨까지 모든 당첨횟수를 새로 표기
+        binding.txtRank01.text = "${ "%,d".format(mRankCount01) } 회"
+        binding.txtRank02.text = "${ "%,d".format(mRankCount02) } 회"
+        binding.txtRank03.text = "${ "%,d".format(mRankCount03) } 회"
+        binding.txtRank04.text = "${ "%,d".format(mRankCount04) } 회"
+        binding.txtRank05.text = "${ "%,d".format(mRankCount05) } 회"
+        binding.txtNoRank.text = "${ "%,d".format(mNoRankCount) } 회"
 
     }
 
