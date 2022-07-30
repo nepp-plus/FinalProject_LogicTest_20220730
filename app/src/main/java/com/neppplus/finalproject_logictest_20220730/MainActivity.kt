@@ -57,13 +57,17 @@ class MainActivity : BaseActivity() {
 //                자동구매 종료 안내
                 Toast.makeText(mContext, "자동 구매가 완료되었습니다.", Toast.LENGTH_SHORT).show()
                 
-//                다음 할일 등록 (mHandler.post) 실행 X. 반복 종료 효과 
+//                다음 할일 등록 (mHandler.post) 실행 X. 반복 종료 효과
                 
             }
 
         }
 
     }
+
+
+//    지금 자동 구매가 진행중인지를 저장해두는 변수 (Flag - Boolean 등으로 상태를 표기하는 변수)
+    var isAutoBuyingNow = false
 
    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,7 +95,29 @@ class MainActivity : BaseActivity() {
 //            }
             
 //            문제점 2. runnable / Handler를 이용해 반복속도를 조금 낮춤. (화면에도 보이게)
-            mHandler.post(buyLottoRunnable)
+//            문제해결 2-1. 자동 진행 중이라면, 다음 할일 제거 > 반복 종료.
+
+            if (!isAutoBuyingNow) {
+//                진행 X 상황 => 할일 등록 (반복 시작)
+                mHandler.post(buyLottoRunnable)
+
+//                자동구매가 진행중이라고 Flag 기록
+                isAutoBuyingNow = true
+//                버튼 문구를 일시정지로
+                binding.btnAutoBuy.text = "일시 정지"
+
+            }
+            else {
+//                이미 돌아가고있는 상황 => 등록되어있던 다음 로또 구매 예정 행위를 제거.
+                mHandler.removeCallbacks( buyLottoRunnable )
+
+//                자동구매가 돌지 않고 있다고 Flag 기록
+                isAutoBuyingNow = false
+                binding.btnAutoBuy.text = "구매 재개"
+
+            }
+
+
             
 
         }
