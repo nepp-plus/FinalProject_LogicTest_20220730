@@ -21,6 +21,10 @@ class MainActivity : BaseActivity() {
 
     val mMyNumbers = arrayListOf( 8, 13, 17, 23, 36, 38 )
 
+//    사용 금액 / 당첨 금액 각각을 변수에 저장하고 활용
+    var mUsedMoney = 0
+    var mEarnedMoney = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -122,6 +126,12 @@ class MainActivity : BaseActivity() {
 //    당첨번호와, 내 번호를 비교해주는 함수를 만들자
 
     fun checkMyRank() {
+
+//        1천원을 사용한 금액으로 기록.
+        mUsedMoney += 1000  // += : 뒤에 적는 금액만큼 값을 증가.
+
+        binding.txtUsedMoney.text = "${ "%,d".format(mUsedMoney) } 원"
+
 
 //        당첨 번호 6개와, 내 번호 6개를 비교해서 => "맞춘 개수"에 따라 등수 판정.
 
