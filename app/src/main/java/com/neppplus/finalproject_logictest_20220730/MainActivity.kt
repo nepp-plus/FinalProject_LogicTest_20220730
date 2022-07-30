@@ -22,7 +22,7 @@ class MainActivity : BaseActivity() {
 
     override fun setupEvents() {
 
-//        당첨 확인 버튼이 눌리면 => 임시 : 1~6의 숫자를 텍스트뷰 6개에 각각 표시
+//        당첨 확인 버튼이 눌리면 => 1~45중 하나의 숫자를 뽑아 텍스트뷰 6개에 각각 표시
 
         binding.btnCheckLottoNum.setOnClickListener {
 
@@ -35,7 +35,11 @@ class MainActivity : BaseActivity() {
 //                lottoNumTxt 변수에는, txtLottoNum01~06이 순서대로 담기면서 반복 실행됨.
 //                + index 변수에는 지금이 몇바퀴째인지 (0,1,2,..,5) 의 숫자가 담겨있게 됨.
 
-                lottoNumTxt.text = (index+1).toString() // index : 3 => 찍어줄 값 : 4
+//                1~45의 랜덤 숫자를 뽑자.
+
+                val randomNum = (1..45).random()
+
+                lottoNumTxt.text = randomNum.toString()
 
             }
 
