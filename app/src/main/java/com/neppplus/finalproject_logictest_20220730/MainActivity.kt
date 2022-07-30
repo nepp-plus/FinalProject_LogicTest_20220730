@@ -37,13 +37,25 @@ class MainActivity : BaseActivity() {
             
             for (i in 0..5) {
 //                단순 6회 반복 for문
-                
+
+//                이미 뽑아둔 숫자와 중복인 숫자가 랜덤으로 나온다면, 무효처리. 다시 뽑자.
+//                제대로 된 숫자가 나올때까지 무한 반복으로 랜덤 뽑자.
+
+                while (true) {
+
 //                1~45 중의 숫자 하나 랜덤 추출
-                val randomNum = (1..45).random()
-                
-//                당첨번호 목록으로 추가 (0~5번칸  채움)
-                mLottoNumbers.add( randomNum )
-                
+                    val randomNum = (1..45).random()
+
+//                    뽑아둔 숫자중에 같은게 없다면? (중복 X) 목록으로 추가,
+//                    무한반복 종료 (다음 숫자 뽑으러 넘어가자)
+
+                    if ( !mLottoNumbers.contains( randomNum ) ) {
+
+//                     중복이 아니니 당첨번호 목록으로 추가 (0~5번칸  채움)
+                        mLottoNumbers.add( randomNum )
+                        break  // 나를 감싸는 반복문을 깨고 탈출 => 무한 반복 종료
+                    }
+                }
             }
             
 
