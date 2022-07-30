@@ -19,6 +19,9 @@ class MainActivity : BaseActivity() {
     val mLottoNumbers = ArrayList<Int>() // 당첨번호 6개를 담을 목록
     val mLottoNumTextViews = ArrayList<TextView>() // 표시용 텍스트 6개를 담을 목록
 
+//    보너스번호는 하나만 있으면 됨. => ArrayList X, 일반 변수로
+    val mBonusLottoNum = 0 // 정수라고 인식만.
+
 //    내 번호 6개는 하드코딩으로 목록에 담아두자.
 
     val mMyNumbers = arrayListOf( 8, 13, 17, 23, 36, 38 )
@@ -87,6 +90,8 @@ class MainActivity : BaseActivity() {
 //            문제점 2. 반복 속도가 너무 빨라서 => 화면에서 표시 불가. (뻗어있는 식으로 나타남)
 //              => 로직 작성 연습 영역 X. 안드로이드 기능 활용 (단순 소개) > 따라 적는 정도만
 //            문제점 3. 2등 당첨 로직 부재. => 보너스 번호 생성 + 2등 판정 로직 추가
+//             풀이 1. 당첨번호를 만들때, 당첨번호 목록과 별개로 보너스번호 변수를 생성 / 값 대입
+//             풀이 2. 맞춘 숫자가 5개 라면 => 보너스 번호를 맞췄다면 2등, 아니라면 3등으로 분기 심화.
             
 
 //            while ( mUsedMoney < 10000000 ) {
@@ -186,6 +191,8 @@ class MainActivity : BaseActivity() {
             }
         }
 
+//        보너스 번호도 만들어야함.
+
 
 //            담아둔 숫자를 정리. (작은 수 ~ 큰 수로 정렬 : order)
 
@@ -211,6 +218,8 @@ class MainActivity : BaseActivity() {
             lottoNumTxt.text = mLottoNumbers[index].toString()
 
         }
+
+//        보너스번호도 텍스트뷰에 보여주자.
 
 
     }
