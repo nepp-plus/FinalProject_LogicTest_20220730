@@ -2,6 +2,7 @@ package com.neppplus.finalproject_logictest_20220730
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.neppplus.finalproject_logictest_20220730.databinding.ActivityMainBinding
@@ -29,13 +30,15 @@ class MainActivity : BaseActivity() {
 //            txt01, txt02, txt03... 등등 텍스트뷰 목록을 만들고 하나씩 꺼내다 쓰자.
 //            for 활용 > 목록에서 하나씩 꺼내주는 역할.
 
-            for (lottoNumTxt  in  mLottoNumTextViews ) {
+            mLottoNumTextViews.forEachIndexed { index, lottoNumTxt ->
 
 //                lottoNumTxt 변수에는, txtLottoNum01~06이 순서대로 담기면서 반복 실행됨.
+//                + index 변수에는 지금이 몇바퀴째인지 (0,1,2,..,5) 의 숫자가 담겨있게 됨.
 
-                lottoNumTxt.text = "5"
+                lottoNumTxt.text = (index+1).toString() // index : 3 => 찍어줄 값 : 4
 
             }
+
 
 
         }
