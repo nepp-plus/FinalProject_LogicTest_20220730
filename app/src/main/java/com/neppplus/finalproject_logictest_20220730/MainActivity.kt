@@ -23,7 +23,7 @@ class MainActivity : BaseActivity() {
 
 //    사용 금액 / 당첨 금액 각각을 변수에 저장하고 활용
     var mUsedMoney = 0
-    var mEarnedMoney = 0
+    var mEarnedMoney = 0L  // 20억을 넘어가는 경우가 있으니, 일반 0이 아니라, Long 타입의 0으로 저장
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -159,12 +159,32 @@ class MainActivity : BaseActivity() {
 //        6개 : 1등, 5개 : (임시) 3등, 4개 : 4등, 3개 : 5등, 그 이하 : 낙첨
 
         when (correctCount) {
-            6 -> Toast.makeText(mContext, "1등", Toast.LENGTH_SHORT).show()
-            5 -> Toast.makeText(mContext, "3등 (임시)", Toast.LENGTH_SHORT).show()
-            4 -> Toast.makeText(mContext, "4등", Toast.LENGTH_SHORT).show()
-            3 -> Toast.makeText(mContext, "5등", Toast.LENGTH_SHORT).show()
-            else -> Toast.makeText(mContext, "낙첨", Toast.LENGTH_SHORT).show()
+            6 -> {
+//                당첨금 61억 증가
+//                cf) 기본 숫자 Int는, -20억 ~ +20억 정도 범위의 숫자만 표현 가능.
+//                61억은 Int로 기록하기에는 지면이 부족함. (공간이 모자람) - overflow
+//                Long 타입으로 변수와 대입값을 변경
+
+                mEarnedMoney += 6100000000
+            }
+            5 -> {
+//                3등 당첨 : 150만원 당첨금 증액
+                mEarnedMoney += 1500000
+            }
+            4 -> {
+                mEarnedMoney += 50000
+            }
+            3 -> {
+                mEarnedMoney += 5000
+            }
+            else -> {
+//                증액 없음. 임시로 비워두자.
+            }
         }
+
+//            늘어난 당첨금을 텍스트뷰에도 반영
+
+        binding.txtEarnedMoney.text = "${ "%,d".format(mEarnedMoney) } 원"
 
     }
 
