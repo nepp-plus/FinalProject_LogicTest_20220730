@@ -34,6 +34,22 @@ class MainActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+//        자동 구매 버튼이 눌리면 => 사용 금액이 1천만원이 될때 까지 반복
+
+        binding.btnAutoBuy.setOnClickListener {
+
+//            문제점 1. 각 등수별로 몇번 당첨됬는지 알고싶다.
+//              => 실제 로직 작성 / UI 반영
+//            문제점 2. 반복 속도가 너무 빨라서 => 화면에서 표시 불가. (뻗어있는 식으로 나타남)
+//              => 로직 작성 연습 영역 X. 안드로이드 기능 활용 (단순 소개) > 따라 적는 정도만
+
+            while ( mUsedMoney < 10000000 ) {
+                makeLottoNumbers()
+                checkMyRank()
+            }
+
+        }
+
 //        당첨 확인 버튼이 눌리면 => 1~45중 하나의 숫자를 뽑아 텍스트뷰 6개에 각각 표시
 
         binding.btnCheckLottoNum.setOnClickListener {
